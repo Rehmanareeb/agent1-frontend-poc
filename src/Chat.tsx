@@ -88,10 +88,14 @@ function Chat() {
 
     onAgent2Stream: setAgent2Entries,
 
-    onAgent2RunFinished: () => {
+    onAgent2RunFinished: reason => {
       setAgent2Running(false)
       setPlayingTestCaseId(null)
-      setStatus('Agent 2 finished the test case run.')
+      setStatus(
+        reason === 'throttled'
+          ? 'Agent 2 is throttled — no machine is available right now. Try the run again later.'
+          : 'Agent 2 finished the test case run.'
+      )
     }
   }
 

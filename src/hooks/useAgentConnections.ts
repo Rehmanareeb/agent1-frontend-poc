@@ -17,7 +17,7 @@ import { createConnectionSettings, getAgent2DirectLineSecret } from '../lib/conn
 import { extractConsentCardInfo, findOAuthCard, getSignInUrl, stringifyActivity } from '../lib/activityUtils'
 import { extractBetween, extractCsvFileName } from '../lib/textExtraction'
 import { isFrontendUserActivity } from '../lib/directLineClient'
-import { Agent2StreamProcessor, createAgent2StreamProcessor, isAgent2RunFinished } from '../lib/agent2Stream'
+import { Agent2StreamProcessor, createAgent2StreamProcessor, isAgent2RunFinished, isAgent2RunThrottled } from '../lib/agent2Stream'
 import { SampleConnectionSettings } from '../settings'
 import { Agent1Result, Agent2StreamEntry, ConsentCardInfo } from '../types'
 
@@ -32,7 +32,7 @@ export interface AgentConnectionHandlers {
   onAgent2SignInRequired(signInUrl: string): void
   onAgent2SignedIn(): void
   onAgent2Stream(entries: Agent2StreamEntry[]): void
-  onAgent2RunFinished(): void
+  onAgent2RunFinished(reason: 'finished' | 'throttled'): void
 }
 
 function extractAgent1Result(botText: string): Agent1Result {
@@ -143,7 +143,7 @@ function handleAgent2Activity(
    */
   if (isAgent2RunFinished(activity)) {
     console.log('[Agent 2] Run finished marker received:', activity?.id)
-    handlers.onAgent2RunFinished()
+    handlers.onAgent2RunFinished(isAgent2RunThrottled(activity) ? 'throttled' : 'finished')
   }
 }
 

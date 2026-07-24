@@ -28,29 +28,29 @@ export type Agent2StreamProcessor = {
 
 
 const RUN_FINISHED_TEXT_PATTERN = /computer use task is finished/i
+const RUN_THROTTLED_TEXT_PATTERN = /still throttled\s*[—–-]\s*system capacity limit reached/i
 
-/**
- * True when the activity marks the end of an Agent 2 (CUA) run.
- *
- * channelData.feedbackLoop alone is not enough: intermediate screenshot
- * attachments carry it too, so the run would be marked finished on the first
- * bot message. Only the closing "Computer use task is finished" message
- * reliably terminates a run.
- */
+
+export function isAgent2RunThrottled(activity: any): boolean {
+  if (activity?.from?.role === 'bot' && activity?.type === 'message') {
+    const text = getActivityText(activity)
+    return Boolean(text && RUN_THROTTLED_TEXT_PATTERN.test(text))
+  }
+
+  return false
+}
+
 export function isAgent2RunFinished(activity: any): boolean {
-  return (
+  const isFinishedMessage =
     activity?.from?.role === 'bot' &&
     activity?.type === 'message' &&
     Boolean(activity?.channelData?.feedbackLoop) &&
     typeof activity?.text === 'string' &&
     RUN_FINISHED_TEXT_PATTERN.test(activity.text)
-  )
+
+  return isFinishedMessage || isAgent2RunThrottled(activity)
 }
 
-/**
- * Some final messages (status summaries, error reports) carry their text
- * inside an Adaptive Card body instead of activity.text.
- */
 function getAdaptiveCardText(activity: any): string | undefined {
   const attachments = Array.isArray(activity?.attachments)
     ? activity.attachments
@@ -99,11 +99,6 @@ function getActivityTimestamp(activity: any): string {
 
   return new Date().toISOString()
 }
-
-/**
- * Keeps the ordered Agent 2 stream: comments in arrival order, with
- * screenshot-only activities folded into the comment they belong to.
- */
 export function createAgent2StreamProcessor(): Agent2StreamProcessor {
   let entries: Agent2StreamEntry[] = []
   let sequence = 0
@@ -125,10 +120,7 @@ export function createAgent2StreamProcessor(): Agent2StreamProcessor {
     },
 
     process(activity: any): Agent2StreamEntry[] | null {
-      /*
-       * Ignore the user's own activities. Bot messages and bot/system events
-       * remain eligible because screenshots may arrive on non-message types.
-       */
+
       if (activity?.from?.role === 'user') {
         return null
       }
@@ -146,10 +138,7 @@ export function createAgent2StreamProcessor(): Agent2StreamProcessor {
       const activityType = typeof activity?.type === 'string' ? activity.type : 'unknown'
       const replyToId = typeof activity?.replyToId === 'string' ? activity.replyToId : undefined
 
-      /*
-       * Normal case: the comment and screenshot are supplied in the same
-       * activity.
-       */
+   
       if (text) {
         const entry: Agent2StreamEntry = {
           id: createEntryId(activity),
@@ -173,11 +162,7 @@ export function createAgent2StreamProcessor(): Agent2StreamProcessor {
         return entries
       }
 
-      /*
-       * Screenshot-only activity: pair it with the related comment. First try
-       * replyToId; if there is no relationship ID, attach it to the latest
-       * comment.
-       */
+    
       let targetIndex = -1
 
       if (replyToId) {
@@ -203,10 +188,7 @@ export function createAgent2StreamProcessor(): Agent2StreamProcessor {
         return entries
       }
 
-      /*
-       * No earlier comment exists, so preserve the screenshot as an image-only
-       * entry.
-       */
+  
       const imageOnlyEntry: Agent2StreamEntry = {
         id: createEntryId(activity),
         activityId,
