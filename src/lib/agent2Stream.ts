@@ -26,10 +26,7 @@ export type Agent2StreamProcessor = {
   reset(): void
 }
 
-/**
- * The terminal message of a CUA run, e.g. "Computer use task is finished.
- * Please start a new conversation if needed".
- */
+
 const RUN_FINISHED_TEXT_PATTERN = /computer use task is finished/i
 
 /**

@@ -18,6 +18,15 @@ export type ScreenshotArchiveResult = {
   failedUrls: string[]
 }
 
+/**
+ * Public CORS Anywhere instance used to reach the Direct Line attachment
+ * endpoint, which sends no CORS headers of its own. The public instance is
+ * rate limited and requires one-time interactive activation per browser at
+ * https://cors-anywhere.herokuapp.com/corsdemo — for anything beyond
+ * experimentation, point this at a self-hosted CORS Anywhere instance.
+ */
+const CORS_PROXY_PREFIX = 'https://cors-anywhere.herokuapp.com/'
+
 const DATA_URL_PATTERN = /^data:(image\/[a-z0-9.+-]+);base64,([\s\S]*)$/i
 const URL_EXTENSION_PATTERN = /\.(png|jpe?g|gif|webp|bmp|svg)(?:$|[?#])/i
 
@@ -78,6 +87,20 @@ type FetchedScreenshot = {
   extension: string
 }
 
+function isDirectLineAttachmentUrl(url: string): boolean {
+  try {
+    const { protocol, hostname } = new URL(url)
+
+    return (
+      protocol === 'https:' &&
+      (hostname === 'directline.botframework.com' ||
+        hostname.endsWith('.botframework.com'))
+    )
+  } catch {
+    return false
+  }
+}
+
 async function fetchScreenshot(url: string): Promise<FetchedScreenshot> {
   /*
    * data: URLs are decoded locally so a huge inline screenshot never depends
@@ -93,12 +116,12 @@ async function fetchScreenshot(url: string): Promise<FetchedScreenshot> {
     }
   }
 
-  /*
-   * Remote https URLs may sit behind auth or a CORS policy that blocks this
-   * origin; the thrown error is reported to the caller rather than aborting
-   * the whole archive.
-   */
-  const response = await fetch(url)
+
+  const fetchUrl = isDirectLineAttachmentUrl(url)
+    ? `${CORS_PROXY_PREFIX}${url}`
+    : url
+
+  const response = await fetch(fetchUrl)
 
   if (!response.ok) {
     throw new Error(`HTTP ${response.status}`)
@@ -130,15 +153,6 @@ function triggerDownload(blob: Blob, fileName: string): void {
   setTimeout(() => URL.revokeObjectURL(objectUrl), 10_000)
 }
 
-/**
- * Packages every screenshot of a finished Agent 2 run into a ZIP whose single
- * top-level folder is named after the saved test case (script), then triggers
- * a browser download. Unfetchable URLs are listed in failed-screenshots.txt
- * inside the folder so nothing disappears silently.
- *
- * Resolves with a summary even when some screenshots fail; resolves with
- * savedCount 0 and no download when the run had no screenshots at all.
- */
 export async function downloadRunScreenshots(
   testCaseName: string,
   entries: Agent2StreamEntry[]
