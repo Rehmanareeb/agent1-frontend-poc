@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { styles } from '../styles'
 import ProductTheme from './ProductTheme'
@@ -17,6 +17,21 @@ function AppHeader({
   status,
   isConnected
 }: AppHeaderProps) {
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsCollapsed(window.scrollY > 120)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
     <>
       <ProductTheme />
@@ -84,7 +99,11 @@ function AppHeader({
         </div>
 
         <div
-          className='relay-connection-card'
+          className={
+            isCollapsed
+              ? 'relay-connection-card relay-connection-card--collapsed'
+              : 'relay-connection-card'
+          }
           style={styles.statusCard}
         >
           <span
@@ -97,19 +116,26 @@ function AppHeader({
           />
 
           <div>
-            <div style={styles.statusLabel}>
-              Agent 1 channel
-            </div>
+            {!isCollapsed && (
+              <div style={styles.statusLabel}>
+                Agent 1 channel
+              </div>
+            )}
 
-            <div style={styles.statusText}>
+            <div
+              className='relay-connection-status'
+              style={styles.statusText}
+            >
               {status}
             </div>
 
-            <div className='relay-connection-meta'>
-              {isConnected
-                ? 'Authenticated · Ready for authoring'
-                : 'Establishing authenticated session'}
-            </div>
+            {!isCollapsed && (
+              <div className='relay-connection-meta'>
+                {isConnected
+                  ? 'Authenticated · Ready for authoring'
+                  : 'Establishing authenticated session'}
+              </div>
+            )}
           </div>
         </div>
       </header>

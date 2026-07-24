@@ -90,6 +90,7 @@ function Chat() {
 
     onAgent2RunFinished: () => {
       setAgent2Running(false)
+      setPlayingTestCaseId(null)
       setStatus('Agent 2 finished the test case run.')
     }
   }
@@ -212,6 +213,7 @@ function Chat() {
     clearAgent2Stream()
     setAgent2Entries([])
     setAgent2Running(false)
+    setPlayingTestCaseId(null)
   }
 
   function handlePlaySavedTestCase(testCase: SavedTestCase) {
@@ -239,7 +241,6 @@ function Chat() {
     postActivity(connection2, createUserMessageActivity(buildPlayTestCasePrompt(testCase)))
       .then(() => {
         setIsLoading(false)
-        setPlayingTestCaseId(null)
         setAgent2Running(true)
         setStatus(`Agent 2 started running saved test case "${testCase.name}".`)
       })

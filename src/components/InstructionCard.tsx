@@ -86,12 +86,19 @@ function InstructionCard({
               : styles.primaryButton
           }
         >
-          <span
-            className='relay-button__icon'
-            aria-hidden='true'
-          >
-            ↗
-          </span>
+          {isLoading ? (
+            <span
+              className='relay-spinner'
+              aria-hidden='true'
+            />
+          ) : (
+            <span
+              className='relay-button__icon'
+              aria-hidden='true'
+            >
+              ↗
+            </span>
+          )}
           {isLoading
             ? 'Generating package…'
             : 'Generate test package'}
