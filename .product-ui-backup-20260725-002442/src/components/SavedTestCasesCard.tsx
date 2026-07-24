@@ -28,50 +28,24 @@ function SavedTestCasesCard({
   onPlay
 }: SavedTestCasesCardProps) {
   return (
-    <section
-      className='relay-card relay-card--green'
-      style={styles.outputCard}
-    >
-      <div className='relay-card-head'>
+    <div style={styles.outputCard}>
+      <div style={styles.outputHeader}>
         <div>
-          <div className='relay-eyebrow'>
-            Run library
-          </div>
-
-          <h2 style={styles.cardTitle}>
-            Approved test packages
-          </h2>
-
-          <p style={styles.cardDescription}>
-            Select a package to inspect its handoff
-            data, or start a Computer Use run with
-            Agent 2.
-          </p>
+          <h2 style={styles.cardTitle}>Saved Test Cases</h2>
+          <p style={styles.cardDescription}>Each approved save creates a row you can run later.</p>
         </div>
-
-        <span style={styles.outputTag}>
-          {testCases.length}{' '}
-          {testCases.length === 1
-            ? 'run'
-            : 'runs'}
-        </span>
+        <span style={styles.outputTag}>Runs</span>
       </div>
 
       <div style={styles.savedList}>
         {testCases.length === 0 ? (
-          <div style={styles.emptyState}>
-            No approved packages yet. Generate a
-            scenario, review both artifacts, then
-            approve the handoff.
-          </div>
+          <div style={styles.emptyState}>No saved test cases yet. Approve &amp; Save to create one.</div>
         ) : (
           testCases.map(testCase => (
             <SavedTestCaseRow
               key={testCase.id}
               testCase={testCase}
-              isPlaying={
-                playingTestCaseId === testCase.id
-              }
+              isPlaying={playingTestCaseId === testCase.id}
               onSelect={onSelect}
               onPlay={onPlay}
             />
@@ -85,7 +59,7 @@ function SavedTestCasesCard({
           onClose={onClearSelection}
         />
       )}
-    </section>
+    </div>
   )
 }
 

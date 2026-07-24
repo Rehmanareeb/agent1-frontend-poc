@@ -1,0 +1,66 @@
+﻿[
+    {
+        "Path":  "src\\components\\ProductTheme.tsx",
+        "Existed":  false
+    },
+    {
+        "Path":  "src\\components\\AppHeader.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\components\\InstructionCard.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\components\\FeedbackCard.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\components\\ConnectorConsentCard.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\components\\GeneratedPreviewCard.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\components\\SavedTestCasesCard.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\components\\SavedTestCaseRow.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\components\\SavedTestCaseDetails.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\components\\Agent2Panel.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\components\\RawResponsePanel.tsx",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\styles\\layout.ts",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\styles\\cards.ts",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\styles\\forms.ts",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\styles\\buttons.ts",
+        "Existed":  true
+    },
+    {
+        "Path":  "src\\styles\\status.ts",
+        "Existed":  true
+    }
+]

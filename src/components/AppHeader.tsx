@@ -6,31 +6,114 @@
 import React from 'react'
 
 import { styles } from '../styles'
+import ProductTheme from './ProductTheme'
 
 type AppHeaderProps = {
   status: string
   isConnected: boolean
 }
 
-function AppHeader({ status, isConnected }: AppHeaderProps) {
+function AppHeader({
+  status,
+  isConnected
+}: AppHeaderProps) {
   return (
-    <div style={styles.header}>
-      <div>
-        <div style={styles.badge}>Computer Use Automation POC</div>
-        <h1 style={styles.title}>Agent 1 Test Script Generator</h1>
-        <p style={styles.subtitle}>
-          Generate CSV test case data, review the Agent 2 execution instruction, revise if needed, and save only after approval.
-        </p>
-      </div>
+    <>
+      <ProductTheme />
 
-      <div style={styles.statusCard}>
-        <span style={isConnected ? styles.statusDotConnected : styles.statusDotWaiting}></span>
-        <div>
-          <div style={styles.statusLabel}>Connection Status</div>
-          <div style={styles.statusText}>{status}</div>
+      <header
+        className='relay-masthead'
+        style={styles.header}
+      >
+        <div style={{ minWidth: 0, flex: 1 }}>
+          <div className='relay-brand-lockup'>
+            <div
+              className='relay-brand-mark'
+              aria-hidden='true'
+            />
+
+            <div>
+              <div style={styles.badge}>
+                Agent Relay Workbench
+              </div>
+
+              <h1 style={styles.title}>
+                Test operations control room
+              </h1>
+            </div>
+          </div>
+
+          <p style={styles.subtitle}>
+            Author the scenario with Agent 1,
+            inspect the handoff package, then run
+            the approved script through Agent 2 and
+            preserve its Computer Use evidence.
+          </p>
+
+          <div
+            className='relay-phase-strip'
+            aria-label='Workflow stages'
+          >
+            <div className='relay-phase'>
+              <div className='relay-phase__label'>
+                Stage 01
+              </div>
+              <div className='relay-phase__value'>
+                Scenario authoring
+              </div>
+            </div>
+
+            <div className='relay-phase'>
+              <div className='relay-phase__label'>
+                Stage 02
+              </div>
+              <div className='relay-phase__value'>
+                Review and approval
+              </div>
+            </div>
+
+            <div className='relay-phase'>
+              <div className='relay-phase__label'>
+                Stage 03
+              </div>
+              <div className='relay-phase__value'>
+                CUA execution evidence
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+
+        <div
+          className='relay-connection-card'
+          style={styles.statusCard}
+        >
+          <span
+            style={
+              isConnected
+                ? styles.statusDotConnected
+                : styles.statusDotWaiting
+            }
+            aria-hidden='true'
+          />
+
+          <div>
+            <div style={styles.statusLabel}>
+              Agent 1 channel
+            </div>
+
+            <div style={styles.statusText}>
+              {status}
+            </div>
+
+            <div className='relay-connection-meta'>
+              {isConnected
+                ? 'Authenticated · Ready for authoring'
+                : 'Establishing authenticated session'}
+            </div>
+          </div>
+        </div>
+      </header>
+    </>
   )
 }
 

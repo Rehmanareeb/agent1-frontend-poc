@@ -5,67 +5,88 @@
 
 import React from 'react'
 
-export const statusStyles: { [key: string]: React.CSSProperties } = {
+export const statusStyles: {
+  [key: string]: React.CSSProperties
+} = {
   statusCard: {
     minWidth: '310px',
     display: 'flex',
     alignItems: 'center',
     gap: '12px',
-    background: 'rgba(255,255,255,0.92)',
-    border: '1px solid #e2e8f0',
-    boxShadow: '0 10px 30px rgba(15,23,42,0.08)',
-    borderRadius: '18px',
-    padding: '16px'
+    padding: '15px 16px',
+    border: '1px solid #d8d2c8',
+    borderRadius: '13px',
+    background: '#f7f4ef'
   },
+
   statusDotConnected: {
-    width: '14px',
-    height: '14px',
+    width: '10px',
+    height: '10px',
+    flex: '0 0 10px',
     borderRadius: '50%',
-    background: '#22c55e',
-    boxShadow: '0 0 0 6px rgba(34,197,94,0.15)'
+    background: '#2d9c72',
+    boxShadow: '0 0 0 5px rgba(45, 156, 114, .12)'
   },
+
   statusDotWaiting: {
-    width: '14px',
-    height: '14px',
+    width: '10px',
+    height: '10px',
+    flex: '0 0 10px',
     borderRadius: '50%',
-    background: '#f59e0b',
-    boxShadow: '0 0 0 6px rgba(245,158,11,0.15)'
+    background: '#c28a2c',
+    boxShadow: '0 0 0 5px rgba(194, 138, 44, .12)'
   },
+
   statusLabel: {
-    fontSize: '12px',
-    color: '#64748b',
-    fontWeight: 700,
+    color: '#7b746c',
+    fontFamily: 'Consolas, Monaco, monospace',
+    fontSize: '9px',
+    fontWeight: 850,
+    letterSpacing: '.09em',
     textTransform: 'uppercase'
   },
+
   statusText: {
     marginTop: '4px',
-    color: '#0f172a',
-    fontSize: '14px',
-    fontWeight: 600
+    color: '#293547',
+    fontSize: '13px',
+    fontWeight: 800
   },
+
   outputTag: {
-    padding: '7px 10px',
-    borderRadius: '999px',
-    background: '#dcfce7',
-    color: '#166534',
-    fontWeight: 800,
-    fontSize: '12px'
+    padding: '6px 9px',
+    border: '1px solid #c8ddd4',
+    borderRadius: '8px',
+    background: '#edf7f2',
+    color: '#2d7056',
+    fontFamily: 'Consolas, Monaco, monospace',
+    fontSize: '9px',
+    fontWeight: 850,
+    letterSpacing: '.04em',
+    textTransform: 'uppercase'
   },
+
   outputTagPurple: {
-    padding: '7px 10px',
-    borderRadius: '999px',
-    background: '#ede9fe',
-    color: '#5b21b6',
-    fontWeight: 800,
-    fontSize: '12px'
+    padding: '6px 9px',
+    border: '1px solid #c7d9d8',
+    borderRadius: '8px',
+    background: '#eaf4f3',
+    color: '#0b6f72',
+    fontFamily: 'Consolas, Monaco, monospace',
+    fontSize: '9px',
+    fontWeight: 850,
+    letterSpacing: '.04em',
+    textTransform: 'uppercase'
   },
+
   emptyState: {
-    padding: '16px',
-    borderRadius: '14px',
-    border: '1px dashed #cbd5e1',
-    background: '#f8fafc',
-    color: '#64748b',
+    padding: '20px',
+    border: '1px dashed #c9c2b8',
+    borderRadius: '12px',
+    background: '#f8f5f0',
+    color: '#767e89',
     textAlign: 'center',
-    fontSize: '14px'
+    fontSize: '12px',
+    lineHeight: 1.6
   }
 }

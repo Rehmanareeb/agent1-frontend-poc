@@ -25,25 +25,76 @@ function FeedbackCard({
   const disabled = !canRevise || isLoading
 
   return (
-    <div style={styles.card}>
-      <h2 style={styles.cardTitle}>Feedback / Change Request</h2>
-      <p style={styles.cardDescription}>Use this if the generated output needs revision before saving.</p>
+    <section
+      className='relay-card relay-card--amber'
+      style={styles.card}
+    >
+      <div className='relay-card-head'>
+        <div>
+          <div className='relay-eyebrow'>
+            Revision loop
+          </div>
+
+          <h2 style={styles.cardTitle}>
+            Refine before handoff
+          </h2>
+
+          <p style={styles.cardDescription}>
+            Send targeted corrections while keeping
+            the current package in draft. Nothing is
+            saved or executed during revision.
+          </p>
+        </div>
+
+        <div className='relay-step-mark'>
+          A1 / 02
+        </div>
+      </div>
+
+      <label
+        className='relay-field-label'
+        htmlFor='relay-feedback-input'
+      >
+        Change request
+      </label>
 
       <textarea
+        id='relay-feedback-input'
         value={feedback}
-        onChange={event => onFeedbackChange(event.target.value)}
+        onChange={event =>
+          onFeedbackChange(event.target.value)
+        }
         style={styles.feedbackBox}
-        placeholder='Example: Create only one test case row and use placeholders for missing required values.'
+        placeholder='Example: Keep one test case row, use placeholders for missing required values, and make the expected result more explicit.'
       />
 
-      <button
-        onClick={onSendChanges}
-        disabled={disabled}
-        style={disabled ? styles.secondaryButtonDisabled : styles.secondaryButton}
-      >
-        Send Changes
-      </button>
-    </div>
+      <div className='relay-action-row'>
+        <span className='relay-action-note'>
+          Revision requests are applied to the
+          current draft only.
+        </span>
+
+        <button
+          type='button'
+          className='relay-button'
+          onClick={onSendChanges}
+          disabled={disabled}
+          style={
+            disabled
+              ? styles.secondaryButtonDisabled
+              : styles.secondaryButton
+          }
+        >
+          <span
+            className='relay-button__icon'
+            aria-hidden='true'
+          >
+            ↺
+          </span>
+          Send revision
+        </button>
+      </div>
+    </section>
   )
 }
 

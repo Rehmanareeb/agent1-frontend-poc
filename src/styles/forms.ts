@@ -5,97 +5,90 @@
 
 import React from 'react'
 
-export const formStyles: { [key: string]: React.CSSProperties } = {
+const baseField: React.CSSProperties = {
+  width: '100%',
+  boxSizing: 'border-box',
+  border: '1px solid #d1cbc1',
+  borderRadius: '11px',
+  padding: '13px 14px',
+  outline: 'none',
+  color: '#17212f'
+}
+
+export const formStyles: {
+  [key: string]: React.CSSProperties
+} = {
   instructionBox: {
-    width: '100%',
-    minHeight: '145px',
+    ...baseField,
+    minHeight: '190px',
     resize: 'vertical',
-    boxSizing: 'border-box',
-    border: '1px solid #cbd5e1',
-    borderRadius: '14px',
-    padding: '14px',
+    background: '#faf8f4',
     fontSize: '14px',
-    outline: 'none',
-    background: '#f8fafc',
-    color: '#0f172a'
+    lineHeight: 1.65
   },
+
   feedbackBox: {
-    width: '100%',
-    minHeight: '120px',
+    ...baseField,
+    minHeight: '130px',
     resize: 'vertical',
-    boxSizing: 'border-box',
-    border: '1px solid #cbd5e1',
-    borderRadius: '14px',
-    padding: '14px',
-    fontSize: '14px',
-    outline: 'none',
-    background: '#f8fafc',
-    color: '#0f172a'
+    background: '#faf8f4',
+    fontSize: '13px',
+    lineHeight: 1.65
   },
+
   csvBox: {
-    width: '100%',
-    minHeight: '230px',
+    ...baseField,
+    minHeight: '290px',
     resize: 'vertical',
-    boxSizing: 'border-box',
-    border: '1px solid #cbd5e1',
-    borderRadius: '14px',
-    padding: '14px',
-    fontSize: '13px',
-    lineHeight: 1.5,
+    borderColor: '#253548',
+    background: '#0e1825',
+    color: '#e2eaf2',
     fontFamily: 'Consolas, Monaco, monospace',
-    outline: 'none',
-    background: '#0f172a',
-    color: '#e2e8f0'
-  },
-  agentInstructionBox: {
-    width: '100%',
-    minHeight: '260px',
-    resize: 'vertical',
-    boxSizing: 'border-box',
-    border: '1px solid #cbd5e1',
-    borderRadius: '14px',
-    padding: '14px',
-    fontSize: '14px',
-    lineHeight: 1.6,
-    outline: 'none',
-    background: '#f8fafc',
-    color: '#0f172a'
-  },
-  detailTextArea: {
-    width: '100%',
-    minHeight: '140px',
-    resize: 'vertical',
-    boxSizing: 'border-box',
-    border: '1px solid #cbd5e1',
-    borderRadius: '14px',
-    padding: '14px',
-    fontSize: '13px',
-    lineHeight: 1.5,
-    fontFamily: 'Consolas, Monaco, monospace',
-    outline: 'none',
-    background: '#ffffff',
-    color: '#0f172a'
-  },
-  rawResponseBox: {
-    marginTop: '14px',
-    width: '100%',
-    minHeight: '260px',
-    resize: 'vertical',
-    boxSizing: 'border-box',
-    border: '1px solid #cbd5e1',
-    borderRadius: '14px',
-    padding: '14px',
     fontSize: '12px',
-    lineHeight: 1.5,
-    fontFamily: 'Consolas, Monaco, monospace',
-    outline: 'none',
-    background: '#020617',
-    color: '#a7f3d0'
+    lineHeight: 1.6
   },
+
+  agentInstructionBox: {
+    ...baseField,
+    minHeight: '290px',
+    resize: 'vertical',
+    background: '#faf8f4',
+    fontSize: '13px',
+    lineHeight: 1.7
+  },
+
+  detailTextArea: {
+    ...baseField,
+    minHeight: '165px',
+    resize: 'vertical',
+    background: '#fffdf9',
+    fontFamily: 'Consolas, Monaco, monospace',
+    fontSize: '11px',
+    lineHeight: 1.6
+  },
+
+  rawResponseBox: {
+    width: '100%',
+    minHeight: '290px',
+    boxSizing: 'border-box',
+    resize: 'vertical',
+    border: 0,
+    borderRadius: 0,
+    padding: '13px',
+    outline: 'none',
+    background: '#0d1724',
+    color: '#9fdbc9',
+    fontFamily: 'Consolas, Monaco, monospace',
+    fontSize: '11px',
+    lineHeight: 1.6
+  },
+
   codeInput: {
+    minWidth: 0,
     flex: 1,
-    padding: '8px 10px',
-    borderRadius: 6,
-    border: '1px solid #ccc'
+    border: '1px solid #d1cbc1',
+    borderRadius: '9px',
+    padding: '9px 11px',
+    outline: 'none'
   }
 }

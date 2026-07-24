@@ -24,44 +24,109 @@ function GeneratedPreviewCard({
   isSaved,
   onApproveAndSave
 }: GeneratedPreviewCardProps) {
-  const disabled = !canApprove || isLoading || isSaved
+  const disabled =
+    !canApprove || isLoading || isSaved
 
   return (
-    <div style={styles.outputCard}>
-      <div style={styles.outputHeader}>
+    <section
+      className='relay-card relay-card--teal'
+      style={styles.outputCard}
+    >
+      <div className='relay-card-head'>
         <div>
-          <h2 style={styles.cardTitle}>Generated Test Case Preview</h2>
-          <p style={styles.cardDescription}>Review the generated CSV and Agent 2 instruction before saving.</p>
+          <div className='relay-eyebrow'>
+            Handoff package
+          </div>
+
+          <h2 style={styles.cardTitle}>
+            Inspect the generated output
+          </h2>
+
+          <p style={styles.cardDescription}>
+            Verify both artifacts before the review
+            gate commits the CSV and Agent 2
+            execution instruction.
+          </p>
         </div>
-        <span style={styles.outputTagPurple}>Preview</span>
+
+        <span style={styles.outputTagPurple}>
+          Draft package
+        </span>
       </div>
 
-      <div style={styles.previewSection}>
-        <div style={styles.previewLabel}>Generated CSV</div>
-        <textarea
-          value={csvOutput || 'Generate output to preview the CSV test cases.'}
-          readOnly
-          style={styles.csvBox}
-        />
+      <div className='relay-preview-grid'>
+        <div className='relay-preview-pane'>
+          <div className='relay-preview-pane__head'>
+            <div style={styles.previewLabel}>
+              Generated CSV
+            </div>
 
-        <div style={styles.previewLabel}>Agent 2 instruction</div>
-        <textarea
-          value={agent2Instruction || 'Generate output to preview the Agent 2 execution instruction.'}
-          readOnly
-          style={styles.agentInstructionBox}
-        />
+            <span className='relay-preview-pane__badge'>
+              Data artifact
+            </span>
+          </div>
 
-        <div style={styles.buttonRow}>
-          <button
-            onClick={onApproveAndSave}
-            disabled={disabled}
-            style={disabled ? styles.successButtonDisabled : styles.successButton}
+          <textarea
+            value={
+              csvOutput ||
+              'Generate a scenario to preview the structured CSV test data.'
+            }
+            readOnly
+            style={styles.csvBox}
+          />
+        </div>
+
+        <div className='relay-preview-pane'>
+          <div className='relay-preview-pane__head'>
+            <div style={styles.previewLabel}>
+              Agent 2 instruction
+            </div>
+
+            <span className='relay-preview-pane__badge'>
+              Relay artifact
+            </span>
+          </div>
+
+          <textarea
+            value={
+              agent2Instruction ||
+              'Generate a scenario to preview the execution instruction that will be relayed to Agent 2.'
+            }
+            readOnly
+            style={styles.agentInstructionBox}
+          />
+        </div>
+      </div>
+
+      <div className='relay-action-row'>
+        <span className='relay-action-note'>
+          Approval saves the current package but does
+          not execute it automatically.
+        </span>
+
+        <button
+          type='button'
+          className='relay-button'
+          onClick={onApproveAndSave}
+          disabled={disabled}
+          style={
+            disabled
+              ? styles.successButtonDisabled
+              : styles.successButton
+          }
+        >
+          <span
+            className='relay-button__icon'
+            aria-hidden='true'
           >
-            {isSaved ? 'Saved' : 'Approve & Save'}
-          </button>
-        </div>
+            ✓
+          </span>
+          {isSaved
+            ? 'Package saved'
+            : 'Approve and save'}
+        </button>
       </div>
-    </div>
+    </section>
   )
 }
 

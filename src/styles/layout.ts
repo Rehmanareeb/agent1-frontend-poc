@@ -5,81 +5,111 @@
 
 import React from 'react'
 
-export const layoutStyles: { [key: string]: React.CSSProperties } = {
+export const layoutStyles: {
+  [key: string]: React.CSSProperties
+} = {
   page: {
     minHeight: '100vh',
-    width: '100vw',
+    width: '100%',
     boxSizing: 'border-box',
-    background: 'linear-gradient(135deg, #eef4ff 0%, #f8fafc 45%, #eefdf8 100%)',
-    padding: '28px',
-    fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
-    color: '#0f172a',
-    overflowY: 'auto'
+    padding: '30px',
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    color: '#17212f',
+    fontFamily:
+      'Inter, Aptos, Segoe UI, Arial, sans-serif',
+    backgroundColor: '#f2efe9',
+    backgroundImage:
+      'linear-gradient(rgba(75, 70, 62, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(75, 70, 62, .045) 1px, transparent 1px)',
+    backgroundSize: '32px 32px'
   },
+
   header: {
-    maxWidth: '1400px',
-    margin: '0 auto 24px auto',
+    maxWidth: '1500px',
+    margin: '0 auto 24px',
+    padding: '25px 26px 22px',
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'space-between',
-    gap: '24px',
-    alignItems: 'center'
+    gap: '26px',
+    border: '1px solid #d8d2c8',
+    borderRadius: '18px',
+    background: 'rgba(255, 253, 249, .96)',
+    boxShadow: '0 20px 54px rgba(35, 42, 52, .10)'
   },
+
   badge: {
     display: 'inline-block',
-    padding: '7px 12px',
-    borderRadius: '999px',
-    background: '#dbeafe',
-    color: '#1d4ed8',
-    fontWeight: 700,
-    fontSize: '12px',
-    letterSpacing: '0.4px',
+    color: '#736d65',
+    fontFamily: 'Consolas, Monaco, monospace',
+    fontSize: '10px',
+    fontWeight: 850,
+    letterSpacing: '.12em',
     textTransform: 'uppercase'
   },
+
   title: {
-    margin: '14px 0 8px 0',
+    margin: '6px 0 0',
+    color: '#17212f',
     fontSize: '34px',
-    lineHeight: 1.1,
-    fontWeight: 800,
-    color: '#0f172a'
+    lineHeight: 1.08,
+    fontWeight: 850,
+    letterSpacing: '-.035em'
   },
+
   subtitle: {
-    margin: 0,
-    fontSize: '15px',
-    color: '#475569',
-    maxWidth: '720px'
+    maxWidth: '830px',
+    margin: '13px 0 0',
+    color: '#68717f',
+    fontSize: '14px',
+    lineHeight: 1.65
   },
+
   grid: {
-    maxWidth: '1400px',
+    maxWidth: '1500px',
     margin: '0 auto',
     display: 'grid',
-    gridTemplateColumns: '420px 1fr',
-    gap: '24px'
+    gridTemplateColumns:
+      'repeat(auto-fit, minmax(min(100%, 520px), 1fr))',
+    gap: '22px',
+    alignItems: 'start'
   },
+
   leftColumn: {
+    minWidth: 0,
+    width: '100%',
+    maxWidth: '560px',
     display: 'flex',
     flexDirection: 'column',
     gap: '20px'
   },
+
   rightColumn: {
+    minWidth: 0,
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     gap: '20px'
   },
+
   buttonRow: {
     display: 'flex',
     gap: '10px',
-    marginTop: '14px',
+    marginTop: '15px',
     flexWrap: 'wrap'
   },
+
   outputHeader: {
     display: 'flex',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
-    gap: '16px',
-    alignItems: 'flex-start'
+    gap: '16px'
   },
+
   signInSection: {
     marginBottom: 16
   },
+
   signInCodeSection: {
     marginTop: 12
   }

@@ -13,39 +13,58 @@ type SavedTestCaseDetailsProps = {
   onClose: () => void
 }
 
-function SavedTestCaseDetails({ testCase, onClose }: SavedTestCaseDetailsProps) {
+function SavedTestCaseDetails({
+  testCase,
+  onClose
+}: SavedTestCaseDetailsProps) {
   return (
     <div style={styles.detailCard}>
-      <div style={styles.outputHeader}>
+      <div className='relay-card-head'>
         <div>
-          <h2 style={styles.cardTitle}>Selected Saved Case</h2>
-          <p style={styles.cardDescription}>{testCase.name}</p>
+          <div className='relay-eyebrow'>
+            Selected run package
+          </div>
+
+          <h3 style={styles.cardTitle}>
+            {testCase.name}
+          </h3>
         </div>
+
         <button
           type='button'
           onClick={onClose}
           style={styles.closeButton}
+          aria-label='Close saved test case details'
         >
-          ✕
+          ×
         </button>
       </div>
 
-      <div style={styles.previewLabel}>Name</div>
-      <div style={styles.detailValue}>{testCase.name}</div>
+      <div className='relay-details-grid'>
+        <div>
+          <div style={styles.previewLabel}>
+            CSV preview
+          </div>
 
-      <div style={styles.previewLabel}>CSV Preview</div>
-      <textarea
-        value={testCase.csvContent}
-        readOnly
-        style={styles.detailTextArea}
-      />
+          <textarea
+            value={testCase.csvContent}
+            readOnly
+            style={styles.detailTextArea}
+          />
+        </div>
 
-      <div style={styles.previewLabel}>Agent 2 Instruction</div>
-      <textarea
-        value={testCase.instruction}
-        readOnly
-        style={styles.detailTextArea}
-      />
+        <div>
+          <div style={styles.previewLabel}>
+            Agent 2 instruction
+          </div>
+
+          <textarea
+            value={testCase.instruction}
+            readOnly
+            style={styles.detailTextArea}
+          />
+        </div>
+      </div>
     </div>
   )
 }

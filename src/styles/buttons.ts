@@ -5,106 +5,111 @@
 
 import React from 'react'
 
-export const buttonStyles: { [key: string]: React.CSSProperties } = {
+const baseButton: React.CSSProperties = {
+  borderRadius: '10px',
+  padding: '10px 15px',
+  fontWeight: 850
+}
+
+export const buttonStyles: {
+  [key: string]: React.CSSProperties
+} = {
   primaryButton: {
-    border: 'none',
-    borderRadius: '12px',
-    padding: '12px 18px',
-    background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
+    ...baseButton,
+    border: '1px solid #a94f2b',
+    background: '#bd5b32',
     color: '#ffffff',
-    fontWeight: 800,
     cursor: 'pointer',
-    boxShadow: '0 10px 20px rgba(37,99,235,0.25)'
+    boxShadow: '0 10px 24px rgba(189, 91, 50, .20)'
   },
+
   primaryButtonDisabled: {
-    border: 'none',
-    borderRadius: '12px',
-    padding: '12px 18px',
-    background: '#94a3b8',
-    color: '#ffffff',
-    fontWeight: 800,
+    ...baseButton,
+    border: '1px solid #d6d0c7',
+    background: '#e2ddd5',
+    color: '#938b82',
     cursor: 'not-allowed'
   },
+
   successButton: {
-    border: 'none',
-    borderRadius: '12px',
-    padding: '12px 18px',
-    background: 'linear-gradient(135deg, #16a34a, #15803d)',
+    ...baseButton,
+    border: '1px solid #256a4d',
+    background: '#2d7a58',
     color: '#ffffff',
-    fontWeight: 800,
     cursor: 'pointer',
-    boxShadow: '0 10px 20px rgba(22,163,74,0.25)'
+    boxShadow: '0 10px 24px rgba(45, 122, 88, .18)'
   },
+
   successButtonDisabled: {
-    border: 'none',
-    borderRadius: '12px',
-    padding: '12px 18px',
-    background: '#94a3b8',
-    color: '#ffffff',
-    fontWeight: 800,
+    ...baseButton,
+    border: '1px solid #d6d0c7',
+    background: '#e2ddd5',
+    color: '#938b82',
     cursor: 'not-allowed'
   },
+
   secondaryButton: {
-    border: 'none',
-    borderRadius: '12px',
-    padding: '12px 18px',
-    background: 'linear-gradient(135deg, #7c3aed, #6d28d9)',
-    color: '#ffffff',
-    fontWeight: 800,
-    cursor: 'pointer',
-    boxShadow: '0 10px 20px rgba(124,58,237,0.25)'
-  },
-  secondaryButtonDisabled: {
-    border: 'none',
-    borderRadius: '12px',
-    padding: '12px 18px',
-    background: '#94a3b8',
-    color: '#ffffff',
-    fontWeight: 800,
-    cursor: 'not-allowed'
-  },
-  cancelButton: {
-    border: 'none',
-    borderRadius: '12px',
-    padding: '12px 18px',
-    background: '#64748b',
-    color: '#ffffff',
-    fontWeight: 800,
+    ...baseButton,
+    border: '1px solid #c9c2b8',
+    background: '#fffdf9',
+    color: '#3d4959',
     cursor: 'pointer'
   },
+
+  secondaryButtonDisabled: {
+    ...baseButton,
+    border: '1px solid #ddd7cf',
+    background: '#ece8e2',
+    color: '#9b948c',
+    cursor: 'not-allowed'
+  },
+
+  cancelButton: {
+    ...baseButton,
+    border: '1px solid #d1cbc1',
+    background: '#f2eee8',
+    color: '#4e5968',
+    cursor: 'pointer'
+  },
+
   playButton: {
-    border: 'none',
-    borderRadius: '999px',
-    width: '40px',
-    height: '40px',
-    background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
+    width: '42px',
+    height: '42px',
+    display: 'grid',
+    placeItems: 'center',
+    border: '1px solid #096f72',
+    borderRadius: '11px',
+    background: '#0b7f82',
     color: '#ffffff',
-    fontSize: '16px',
-    fontWeight: 900,
     cursor: 'pointer',
-    boxShadow: '0 8px 16px rgba(37,99,235,0.24)'
-  },
-  playButtonLoading: {
-    border: 'none',
-    borderRadius: '999px',
-    width: '40px',
-    height: '40px',
-    background: '#94a3b8', // Gray background for loading state
-    color: '#ffffff',
-    fontSize: '16px',
+    fontSize: '14px',
     fontWeight: 900,
-    cursor: 'not-allowed',
-    boxShadow: 'none'
+    boxShadow: '0 9px 21px rgba(11, 127, 130, .20)'
   },
+
+  playButtonLoading: {
+    width: '42px',
+    height: '42px',
+    display: 'grid',
+    placeItems: 'center',
+    border: '1px solid #d6d0c7',
+    borderRadius: '11px',
+    background: '#e2ddd5',
+    color: '#938b82',
+    cursor: 'not-allowed',
+    fontSize: '14px',
+    fontWeight: 900
+  },
+
   closeButton: {
-    border: 'none',
-    borderRadius: '999px',
     width: '34px',
     height: '34px',
-    background: '#e2e8f0',
-    color: '#334155',
-    fontSize: '16px',
-    fontWeight: 800,
-    cursor: 'pointer'
+    border: '1px solid #d4cec5',
+    borderRadius: '9px',
+    background: '#fffdf9',
+    color: '#4d5867',
+    cursor: 'pointer',
+    fontSize: '18px',
+    fontWeight: 700
   }
 }
