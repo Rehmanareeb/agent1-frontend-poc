@@ -88,9 +88,14 @@ function Chat() {
 
     onAgent2Stream: setAgent2Entries,
 
-    onAgent2RunFinished: () => {
+    onAgent2RunFinished: reason => {
       setAgent2Running(false)
-      setStatus('Agent 2 finished the test case run.')
+      setPlayingTestCaseId(null)
+      setStatus(
+        reason === 'throttled'
+          ? 'Agent 2 is throttled — no machine is available right now. Try the run again later.'
+          : 'Agent 2 finished the test case run.'
+      )
     }
   }
 
@@ -212,6 +217,7 @@ function Chat() {
     clearAgent2Stream()
     setAgent2Entries([])
     setAgent2Running(false)
+    setPlayingTestCaseId(null)
   }
 
   function handlePlaySavedTestCase(testCase: SavedTestCase) {
@@ -239,7 +245,6 @@ function Chat() {
     postActivity(connection2, createUserMessageActivity(buildPlayTestCasePrompt(testCase)))
       .then(() => {
         setIsLoading(false)
-        setPlayingTestCaseId(null)
         setAgent2Running(true)
         setStatus(`Agent 2 started running saved test case "${testCase.name}".`)
       })

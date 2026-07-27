@@ -80,7 +80,14 @@ function SavedTestCaseRow({
         title='Run with Agent 2'
         aria-label={`Run ${testCase.name} with Agent 2`}
       >
-        {isPlaying ? '…' : '▶'}
+        {isPlaying ? (
+          <span
+            className='relay-spinner'
+            aria-hidden='true'
+          />
+        ) : (
+          '▶'
+        )}
       </button>
     </div>
   )

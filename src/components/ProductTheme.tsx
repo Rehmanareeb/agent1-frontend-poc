@@ -438,6 +438,36 @@ function ProductTheme() {
         font-size: 10px;
       }
 
+      .relay-connection-card--collapsed {
+        position: fixed;
+        top: 14px;
+        right: 18px;
+        z-index: 60;
+        min-width: 0 !important;
+        padding: 10px 14px !important;
+        box-shadow: 0 14px 34px rgba(35, 42, 52, .18);
+      }
+
+      .relay-connection-card--collapsed .relay-connection-status {
+        margin-top: 0 !important;
+      }
+
+      .relay-spinner {
+        width: 14px;
+        height: 14px;
+        flex: 0 0 14px;
+        border-radius: 50%;
+        border: 2px solid rgba(120, 112, 102, .30);
+        border-top-color: currentColor;
+        animation: relay-spin .7s linear infinite;
+      }
+
+      @keyframes relay-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
       @media (max-width: 980px) {
         .relay-preview-grid,
         .relay-details-grid {
